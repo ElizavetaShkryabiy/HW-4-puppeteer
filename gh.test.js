@@ -7,8 +7,7 @@ afterEach(() => {
 describe("Github page tests", () => {
   beforeEach(async () => {    
     page = await browser.newPage();
-    await page.setDefaultNavigationTimeout(60000);
-    await page.goto('https://github.com/team', {timeout: 60000});
+    await page.goto('https://github.com/team');
   });  
   
   test("The h1 header content'", async () => {
@@ -17,12 +16,12 @@ describe("Github page tests", () => {
     await page.waitForSelector('h1');
     const title2 = await page.title();
     expect(title2).toEqual('GitHub: Where the world builds software · GitHub');
-  });
+  }, 60000);
 
   test("The first link attribute", async () => {
     const actual = await page.$eval("a", link => link.getAttribute('href') );
     expect(actual).toEqual("#start-of-content");
-  });
+  }, 60000);
 
   test("The page contains Sign in button", async () => {
     const btnSelector = ".btn-large-mktg.btn-mktg";
@@ -31,29 +30,34 @@ describe("Github page tests", () => {
     });
     const actual = await page.$eval(btnSelector, link => link.textContent);
     expect(actual).toContain("Sign up for free")
-  });
+  }, 60000);
 });
 test("The page featurers title", async () => {
   page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(60000);
   await page.goto("https://github.com/features");
   await page.waitForSelector('h1');
   const title2 = await page.title();
   expect(title2).toEqual('Features | GitHub · GitHub');
-})
+}, 60000)
 test("The page enterprise title", async () => {
   page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(60000);
   await page.goto("https://github.com/enterprise");
   await page.waitForSelector('h1');
   const title2 = await page.title();
   expect(title2).toEqual('Enterprise · A smarter way to work together · GitHub');
-})
+}, 60000)
 test("The page pricing title", async () => {
   page = await browser.newPage();
-  await page.setDefaultNavigationTimeout(60000);
   await page.goto("https://github.com/pricing");
   await page.waitForSelector('h1');
   const title2 = await page.title();
   expect(title2).toEqual('Pricing · Plans for every developer · GitHub');
-})
+},60000)
+
+test("Netology", async () => {
+  page = await browser.newPage();
+  await page.goto("https://netology.ru/");
+  await page.waitForSelector('h1');
+  const title2 = await page.title();
+  expect(title2).toEqual('Нетология – курсы и обучение интернет-профессиям онлайн');
+}, 60000)
