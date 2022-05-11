@@ -8,8 +8,7 @@ afterEach(() => {
 });
 
 describe("Github page tests", () => {
-  beforeEach(async () => {    
-    page = await browser.newPage();
+  beforeEach(async () => {
     await page.goto('https://github.com/team');
   });  
   
